@@ -1,14 +1,7 @@
 ---
-group: b2b
-subgroup: 10_REST
+group: b2b-developer-guide
 title: Assign categories and products to a shared catalog
-menu_title: Assign categories and products
-menu_order: 23
-version: 2.2
-ee_only: True
-level3_menu_node: level3child
-level3_subgroup: shared
-github_link: b2b/shared-cat-product-assign.md
+ee_only: true
 functional_areas:
   - B2B
   - Catalog
@@ -25,9 +18,8 @@ The shared catalog configuration process includes assigning categories and produ
 
 The `sharedCatalogCategoryManagementV1` service is based on `catalogCategoryManagementV1`. To view a store's category structure, call `GET /V1/categories`.
 
-<div class="bs-callout bs-callout-info" id="info" markdown="1">
+{: .bs-callout .bs-callout-info }
 Products that are defined within a category are not included when you assign a category to a shared catalog. You must add products separately.
-</div>
 
 **Service name**
 
@@ -35,17 +27,16 @@ Products that are defined within a category are not included when you assign a c
 
 **REST Endpoints**
 
-{% highlight json %}
+```
 POST /V1/sharedCatalog/:id/assignCategories
 POST /V1/sharedCatalog/:id/unassignCategories
 GET  /V1/sharedCatalog/:id/categories
-{% endhighlight %}
+```
 
 **Category parameters**
 
-<div class="bs-callout bs-callout-info" id="info" markdown="1">
+{: .bs-callout .bs-callout-info }
 Although you can specify other parameters defined within a `categories` object, the `id` is the only one used to assign or unassign a category to a shared catalog.
-</div>
 
 Name | Description | Format | Requirements
 --- | --- | --- | ---
@@ -61,7 +52,7 @@ The following example adds the Luma Gear category (`id=3`) as well as its subcat
 
 **Payload**
 
-{% highlight json %}
+```json
 {
   "categories": [
     {
@@ -78,7 +69,7 @@ The following example adds the Luma Gear category (`id=3`) as well as its subcat
     }
   ]
 }
-{% endhighlight %}
+```
 
 **Response**
 
@@ -96,7 +87,7 @@ The following example removes two categories from the shared catalog.
 
 **Payload**
 
-{% highlight json %}
+```json
 {
   "categories": [
     {
@@ -108,7 +99,7 @@ The following example removes two categories from the shared catalog.
     }
   ]
 }
-{% endhighlight %}
+```
 
 **Response**
 
@@ -128,14 +119,14 @@ Not applicable
 
 **Response**
 
-{% highlight json %}
+```json
 [
   3,
   4,
   5,
   6
 ]
-{% endhighlight %}
+```
 
 ## Assign products
 
@@ -147,17 +138,16 @@ The `sharedCatalogProductManagementV1` service is based on `catalogProductManage
 
 **REST endpoints**
 
-{% highlight json %}
+```
 POST  /V1/sharedCatalog/:id/assignProducts
 POST  /V1/sharedCatalog/:id/unassignProducts
 GET  /V1/sharedCatalog/:id/products
-{% endhighlight %}
+```
 
 **Category parameters**
 
-<div class="bs-callout bs-callout-info" id="info" markdown="1">
+{: .bs-callout .bs-callout-info }
 Although you can specify other parameters defined within a `products` object, the `sku` is the only one used to assign or unassign a product to a shared catalog.
-</div>
 
 Name | Description | Format | Requirements
 --- | --- | --- | ---
@@ -173,7 +163,7 @@ The following example adds two products each in the Bags, Fitness Equipment, and
 
 **Payload**
 
-{% highlight json %}
+```json
 {
 	"products": [
     	{
@@ -196,7 +186,7 @@ The following example adds two products each in the Bags, Fitness Equipment, and
     	}
 	]
 }
-{% endhighlight %}
+```
 
 **Response**
 
@@ -211,7 +201,8 @@ Unassigning a product does not remove it from its category or categories.
 `POST /V1/sharedCatalog/2/unassignProducts`
 
 **Payload**
-{% highlight json %}
+
+```json
 {
   "products": [
   	{
@@ -219,7 +210,7 @@ Unassigning a product does not remove it from its category or categories.
   	}
   ]
 }
-{% endhighlight %}
+```
 
 **Response**
 
@@ -239,15 +230,15 @@ Not applicable
 
 **Response**
 
-{% highlight json %}
+```json
 [
-    "24-MB01",
-    "24-MB04",
-    "24-UG06",
-    "24-UG07",
-    "24-MG04"
+  "24-MB01",
+  "24-MB04",
+  "24-UG06",
+  "24-UG07",
+  "24-MG04"
 ]
-{% endhighlight %}
+```
 
 ## Related information
 

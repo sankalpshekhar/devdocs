@@ -1,14 +1,7 @@
 ---
-group: b2b
-subgroup: 10_REST
+group: b2b-developer-guide
 title: Negotiable quote checkout
-menu_title: Negotiable quote checkout
-menu_order: 34
-version: 2.2
-ee_only: True
-level3_menu_node: level3child
-level3_subgroup: nq
-github_link: b2b/negotiable-checkout.md
+ee_only: true
 functional_areas:
   - B2B
   - Integration
@@ -22,7 +15,7 @@ The same rule is applied when the quote has the proposed shipping price and the 
 
 The following diagram illustrates the workflow for {{site.data.var.b2b}} negotiable quote checkouts:
 
-![Checkout process]({{ page.baseurl }}/b2b/images/quote-checkout-process.png)
+![Checkout process]({{ site.baseurl }}/common/images/b2b/quote-checkout-process.png)
 
 ## Manage shipping addresses
 
@@ -30,11 +23,11 @@ A negotiated quote can be initiated without a shipping address. However, before 
 
 **REST Endpoints**
 
-{% highlight json %}
+```json
 POST /V1/negotiable-carts/:cartId/estimate-shipping-methods
 POST /V1/negotiable-carts/:cartId/estimate-shipping-methods-by-address-id
 POST /V1/negotiable-carts/:cartId/shipping-information
-{% endhighlight %}
+```
 
 ### Estimate shipping costs specifying an address
 
@@ -50,7 +43,7 @@ This call takes a full shipping address as input and estimates shipping fees. It
 
 **Payload**
 
-{% highlight json %}
+```json
 {
   "address": {
   "street": [
@@ -66,11 +59,11 @@ This call takes a full shipping address as input and estimates shipping fees. It
   "lastname": "Doe"
   }
 }
-{% endhighlight %}
+```
 
 **Response**
 
-{% highlight json %}
+```json
 [
   {
     "carrier_code": "flatrate",
@@ -85,8 +78,7 @@ This call takes a full shipping address as input and estimates shipping fees. It
     "price_incl_tax": 5
   }
 ]
-
-{% endhighlight %}
+```
 
 ### Estimate shipping costs specifying an address ID
 
@@ -102,15 +94,15 @@ This call takes an address ID as input and estimates shipping fees. It returns a
 
 **Payload**
 
-{% highlight json %}
+```json
 {
   "addressId": 2
 }
-{% endhighlight %}
+```
 
 **Response**
 
-{% highlight json %}
+```json
 [
   {
     "carrier_code": "flatrate",
@@ -125,8 +117,7 @@ This call takes an address ID as input and estimates shipping fees. It returns a
     "price_incl_tax": 5
   }
 ]
-
-{% endhighlight %}
+```
 
 ### Set the shipping and billing information
 
@@ -142,7 +133,7 @@ In this call, you specify the shipping and billing addresses, as well as the sel
 
 **Payload**
 
-{% highlight json %}
+```json
 {  "addressInformation": {
 	  "shipping_address": {
        "region": "California",
@@ -176,12 +167,13 @@ In this call, you specify the shipping and billing addresses, as well as the sel
   "shipping_method_code": "flatrate"
   }
 }
-{% endhighlight %}
+```
 
 **Response**
 
 {% collapsible Show code sample %}
-{% highlight json %}
+
+```json
 {
   "payment_methods": [
     {
@@ -340,7 +332,8 @@ In this call, you specify the shipping and billing addresses, as well as the sel
     }
   }
 }
-{% endhighlight %}
+```
+
 {% endcollapsible %}
 
 ## Manage billing addresses
@@ -353,10 +346,10 @@ If the billing address isn't provided through another call, use the `POST /V1/ne
 
 **REST Endpoints**
 
-{% highlight json %}
+```json
 POST /V1/negotiable-carts/:cartId/billing-address
 GET /V1/negotiable-carts/:cartId/billing-address
-{% endhighlight %}
+```
 
 ### Set the billing address
 
@@ -368,7 +361,7 @@ This call assigns a billing address to the specified negotiable quote.
 
 **Payload**
 
-{% highlight json %}
+```json
 {  "address": {
       "region": "New York",
       "region_id": 43,
@@ -387,7 +380,7 @@ This call assigns a billing address to the specified negotiable quote.
       "same_as_billing": 1
   }
 }
-{% endhighlight %}
+```
 
 **Response**
 
@@ -407,7 +400,7 @@ Not applicable
 
 **Response**
 
-{% highlight json %}
+```json
 {
   "id": 192,
   "region": "New York",
@@ -427,7 +420,7 @@ Not applicable
   "same_as_billing": 0,
   "save_in_address_book": 0
 }
-{% endhighlight %}
+```
 
 ## Manage cart coupons
 
@@ -439,10 +432,10 @@ B2B allows coupons to be used toward payment.
 
 **REST Endpoints**
 
-{% highlight json %}
+```json
 PUT /V1/negotiable-carts/:cartId/coupons/:couponCode
 DELETE /V1/negotiable-carts/:cartId/coupons
-{% endhighlight %}
+```
 
 ### Apply a coupon to a negotiable quote
 
@@ -470,10 +463,10 @@ B2B allows gift cards to be used as payment.
 
 **REST Endpoints**
 
-{% highlight json %}
+```json
 POST /V1/negotiable-carts/:cartId/giftCards
 DELETE /V1/negotiable-carts/:cartId/giftCards/:giftCardCode
-{% endhighlight %}
+```
 
 ### Apply a gift card to a negotiable quote
 
@@ -485,7 +478,7 @@ If the initial quote applies a gift card to the totals, Magento ignores the gift
 
 **Payload**
 
-{% highlight json %}
+```json
 {
   "giftCardAccountData": {
     "gift_cards": [
@@ -493,7 +486,7 @@ If the initial quote applies a gift card to the totals, Magento ignores the gift
     ]
   }
 }
-{% endhighlight %}
+```
 
 **Response**
 
@@ -525,11 +518,11 @@ When you submit payment information, Magento creates an order and sends an order
 
 **REST Endpoints**
 
-{% highlight json %}
+```json
 POST /V1/negotiable-carts/:cartId/payment-information
 GET /V1/negotiable-carts/:cartId/payment-information
 POST /V1/negotiable-carts/:cartId/set-payment-information
-{% endhighlight %}
+```
 
 ### Set payment information without placing the order
 
@@ -541,7 +534,7 @@ This call sets payment information and the billing address for the negotiable qu
 
 **Payload**
 
-{% highlight json %}
+```json
 {  "paymentMethod": {
    "po_number": "A123456",
    "method": "checkmo"
@@ -562,7 +555,7 @@ This call sets payment information and the billing address for the negotiable qu
     "telephone": "512-555-1111"
   }
 }
-{% endhighlight %}
+```
 
 **Response**
 
@@ -578,7 +571,7 @@ This call sets payment information and the billing address for the negotiable qu
 
 **Payload**
 
-{% highlight json %}
+```json
 {  "paymentMethod": {
     "po_number": "A123456",
     "method": "checkmo"
@@ -599,7 +592,7 @@ This call sets payment information and the billing address for the negotiable qu
     "telephone": "512-555-1111"
   }
 }
-{% endhighlight %}
+```
 
 **Response**
 
@@ -620,7 +613,8 @@ Not applicable
 **Response**
 
 {% collapsible Show code sample %}
-{% highlight json %}
+
+```json
 {
   "payment_methods": [
     {
@@ -779,7 +773,8 @@ Not applicable
     }
   }
 }
-{% endhighlight %}
+```
+
 {% endcollapsible %}
 
 ## Review cart totals
@@ -792,9 +787,9 @@ This call is similar to `GET /V1/negotiable-carts/:cartId/payment-information`, 
 
 **REST Endpoints**
 
-{% highlight json %}
+```json
 GET /V1/negotiable-carts/:cartId/totals
-{% endhighlight %}
+```
 
 **Sample Usage**
 
@@ -807,7 +802,8 @@ Not applicable
 **Response**
 
 {% collapsible Show code sample %}
-{% highlight json %}
+
+```json
 {
   "totals": {
     "grand_total": 5.95,
@@ -960,8 +956,8 @@ Not applicable
     }
   }
 }
+```
 
-{% endhighlight %}
 {% endcollapsible %}
 
 ## Related information
